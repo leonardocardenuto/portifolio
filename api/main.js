@@ -5,7 +5,11 @@ const cookieParser = require("cookie-parser");
 const app = express();
 const port = 4000;
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({
+  origin: true,
+  credentials: true,
+}));
+
 app.use(cookieParser());
 
 const visitors = [];
@@ -34,7 +38,11 @@ app.get("/check-visitor", (req, res) => {
 
   if (existingVisitor) {
     return res
-      .cookie("visitorId", visitorId, { httpOnly: true })
+      .cookie("visitorId", visitorId, {
+        httpOnly: true,
+        sameSite: "none",
+        secure: process.env.NODE_ENV === "production",
+      })
       .json({ position: `#${existingVisitor.position}` });
   }
 
@@ -44,10 +52,14 @@ app.get("/check-visitor", (req, res) => {
   cleanupVisitors();
 
   return res
-    .cookie("visitorId", visitorId, { httpOnly: true })
+    .cookie("visitorId", visitorId, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: process.env.NODE_ENV === "production",
+    })
     .json({ position: `#${visitorPosition}` });
 });
 
 app.listen(port, () => {
-  console.log(`Visitors Counter running at ${port}`);
+  console.log(`Visitors Counter running at http://localhost:${port}`);
 });
