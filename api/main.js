@@ -1,9 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.use(cors({
   origin: true,
@@ -45,7 +46,7 @@ app.get("/check-visitor", (req, res) => {
       })
       .json({ position: `#${existingVisitor.position}` });
   }
-
+  
   const visitorPosition = visitors.length + 1;
   visitors.push({ id: visitorId, position: visitorPosition });
 
