@@ -1,101 +1,72 @@
-import Image from "next/image";
+'use client';
+import { useEffect, useState, useRef } from "react";
+import { Navbar } from "@/components/Navbar";
+import { BackgroundLines } from "@/components/ui/background-lines";
+import { FlipWords } from "@/components/ui/flip-words";
+import { FaUser, FaProjectDiagram, FaDownload, FaChessKnight, FaTerminal } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import Skills from "@/components/Skills";
+
+const scrollToRef = (ref: React.RefObject<HTMLElement>) => {
+  if (ref.current) {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const experienceRef = useRef<HTMLDivElement>(null); 
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const navItems = [
+    { name: "TechStack", link: "#", icon: <FaTerminal />, action: () => scrollToRef(skillsRef) },
+    { name: "Experience", link: "#", icon: <FaChessKnight />, action: () => scrollToRef(experienceRef) },
+    { name: "Projects", link: "/projects", icon: <FaProjectDiagram /> },
+    { name: "Contact", link: "/about", icon: <FaUser /> },
+  ];
+
+  const words = ["SMART", "PRETTY", "QUICK"];
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return (
+    <div>
+      <Navbar navItems={navItems} />
+      <main className="dark">
+        <BackgroundLines className="flex items-center justify-center w-full flex-col px-4 py-8">
+          <div className="max-w-4xl w-full bg-white dark:bg-neutral-800 rounded-xl shadow-xl hover:shadow-2xl transform transition-all duration-300 ease-in-out p-8 flex items-center space-x-8">
+            <div className="relative w-[120px] h-[120px]">
+              <img
+                src="https://64.media.tumblr.com/27af6e6a4e06e6d33d535710bd6ca948/50f70419bc70f9d7-b7/s400x600/d6fd17a4115f03bd49c11357084496c5e2a0f17d.png"
+                alt="Leonardo Cardenuto"
+                className="w-[120px] h-[120px] rounded-full object-cover border-4 border-gradient-to-r from-blue-500 to-green-400"
+              />
+              <p className="flex items-center text-danger font-semibold mt-2">
+                &nbsp; &nbsp; <FaLocationDot /> &nbsp; Brazil, SP
+              </p>
+            </div>
+            <div className="flex flex-col justify-center space-y-4">
+              <h2 className="bg-clip-text text-primary bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-600 dark:to-white text-3xl md:text-5xl lg:text-6xl font-sans font-semibold tracking-tight leading-tight">
+                Leonardo Cardenuto, <br /> <p className="text-warning">Full Stack Developer</p>
+              </h2>
+              <div className="flex items-center space-x-2 text-neutral-700 dark:text-neutral-400 text-lg">
+                <p className="text-sm md:text-base mt-1 max-w-prose">
+                  Hi 👋, I'm Leo, a 2nd year computer science student, coding{" "}
+                  {isClient && <FlipWords words={words} />} solutions.
+                </p>
+              </div>
+            </div>
+          </div>
+          <button className="custom-button inline-flex h-12 items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-4 font-medium text-slate-400 transition-colors hover:outline-none hover:ring-2 hover:ring-slate-400 hover:ring-offset-2 hover:ring-offset-slate-50 animate-shimmer">
+            <FaDownload /> &nbsp; Download my CV
+          </button>
+        </BackgroundLines>
+        <div ref={skillsRef} className="flex items-center justify-center w-full flex-col px-4 py-8 mt-5">
+          <Skills />
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
