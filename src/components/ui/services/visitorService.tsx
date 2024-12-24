@@ -2,10 +2,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/check-
 
 export const getVisitorPosition = async (): Promise<string> => {
   try {
-    const visitorId = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('visitorId='))
-      ?.split('=')[1];
+    let visitorId = localStorage.getItem("visitorId");
+
+    if (!visitorId) {
+      visitorId = `${Date.now()}-${Math.random()}`;
+      localStorage.setItem("visitorId", visitorId); 
+    }
 
     const response = await fetch(API_URL, {
       method: "POST",
@@ -13,9 +15,8 @@ export const getVisitorPosition = async (): Promise<string> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        visitorId: visitorId || "", 
+        visitorId: visitorId, 
       }),
-      credentials: "include",
     });
 
     if (!response.ok) {
