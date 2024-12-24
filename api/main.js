@@ -19,6 +19,15 @@ function cleanupVisitors() {
   }
 }
 
+app.get("/", (req, res) => {
+  res.send({
+    message: "🚀 Welcome to our API! 🌟",
+    tips: "Use the endpoints wisely and enjoy your coding journey! 🧑‍💻",
+    status: "success",
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.get("/check-visitor", (req, res) => {
   const visitorIp = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
