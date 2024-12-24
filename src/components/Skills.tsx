@@ -24,13 +24,13 @@ const Skills = () => {
       <header className="mb-10 space-y-4">
         <motion.h1
           {...fadeIn("x")}
-          className="text-3xl min-[430px]:text-4xl md:text-5xl font-bold dark:text-stone-200"
+          className="text-3xl min-[430px]:text-4xl md:text-5xl font-bold text-stone-200"
         >
           Current Technologies
         </motion.h1>
         <motion.p
           {...fadeIn("x", 0.3)}
-          className="text-sm min-[430px]:text-base max-w-lg md:max-w-3xl text-dark-200/70 dark:text-stone-200/70"
+          className="text-sm min-[430px]:text-base max-w-lg md:max-w-3xl text-dark-200/70 text-stone-200/70"
         >
           I&apos;m skilled in a variety of modern tools and frameworks that enable me 
           to create seamless, high-performing solutions. Here&apos;s a glimpse at my tech stack:
@@ -39,7 +39,7 @@ const Skills = () => {
 
       <motion.h1
         {...fadeIn("x")}
-        className="mb-5 text-2xl min-[430px]:text-3xl md:text-4xl font-bold dark:text-stone-200"
+        className="mb-5 text-2xl min-[430px]:text-3xl md:text-4xl font-bold text-stone-200"
       >
         Programming Languages
       </motion.h1>
@@ -54,7 +54,7 @@ const Skills = () => {
 
       <motion.h1
         {...fadeIn("x", 0.3)}
-        className="mb-5 text-2xl min-[430px]:text-3xl md:text-4xl font-bold dark:text-stone-200 mt-10"
+        className="mb-5 text-2xl min-[430px]:text-3xl md:text-4xl font-bold text-stone-200 mt-10"
       >
         Frameworks
       </motion.h1>
@@ -69,7 +69,7 @@ const Skills = () => {
 
       <motion.h1
         {...fadeIn("x", 0.6)}
-        className="mb-5 text-2xl min-[430px]:text-3xl md:text-4xl font-bold dark:text-stone-200 mt-10"
+        className="mb-5 text-2xl min-[430px]:text-3xl md:text-4xl font-bold text-stone-200 mt-10"
       >
         Databases
       </motion.h1>

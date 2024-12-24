@@ -34,9 +34,9 @@ export default function Home() {
   return (
     <div>
       <Navbar navItems={navItems} />
-      <main className="dark">
+      <main className="">
         <BackgroundLines className="flex items-center justify-center w-full flex-col px-4 py-8">
-          <div className="max-w-4xl w-full bg-white dark:bg-neutral-800 rounded-xl shadow-xl hover:shadow-2xl transform transition-all duration-300 ease-in-out p-8 flex items-center space-x-8">
+          <div className="max-w-4xl w-full bg-white bg-neutral-800 rounded-xl shadow-xl hover:shadow-2xl transform transition-all duration-300 ease-in-out p-8 flex items-center space-x-8">
             <div className="relative w-[120px] h-[120px]">
               <img
                 src="https://64.media.tumblr.com/27af6e6a4e06e6d33d535710bd6ca948/50f70419bc70f9d7-b7/s400x600/d6fd17a4115f03bd49c11357084496c5e2a0f17d.png"
@@ -48,10 +48,10 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col justify-center space-y-4">
-              <h2 className="bg-clip-text text-primary bg-gradient-to-b from-neutral-900 to-neutral-700 dark:from-neutral-600 dark:to-white text-3xl md:text-5xl lg:text-6xl font-sans font-semibold tracking-tight leading-tight">
+              <h2 className="bg-clip-text text-primary bg-gradient-to-b from-neutral-900 to-neutral-700 from-neutral-600 to-white text-3xl md:text-5xl lg:text-6xl font-sans font-semibold tracking-tight leading-tight">
                 Leonardo Cardenuto, <br /> <p className="text-warning">Full Stack Developer</p>
               </h2>
-              <div className="flex items-center space-x-2 text-neutral-700 dark:text-neutral-400 text-lg">
+              <div className="flex items-center space-x-2 text-neutral-700 text-neutral-400 text-lg">
                 <p className="text-sm md:text-base mt-1 max-w-prose">
                   Hi 👋, I'm Leo, a 2nd year computer science student, coding{" "}
                   {isClient && <FlipWords words={words} />} solutions.
