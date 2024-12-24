@@ -1,12 +1,6 @@
 // services/visitorService.tsx
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/check-visitor";
 
-if (!process.env.NEXT_PUBLIC_API_URL) {
-  console.error("Environment variable NEXT_PUBLIC_API_URL is not defined. Using default URL.");
-} else {
-  console.log("API_URL is set to:", API_URL);
-}
-
 export const getVisitorPosition = async (): Promise<string> => {
   try {
     const response = await fetch(API_URL, {
@@ -14,10 +8,17 @@ export const getVisitorPosition = async (): Promise<string> => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     });
 
     if (!response.ok) {
       throw new Error("Failed to fetch visitor position");
+    }
+
+    const visitorId = response.headers.get('set-cookie');
+
+    if (visitorId) {
+      document.cookie = `visitorId=${visitorId}; path=/; max-age=3600; secure; samesite=None`;
     }
 
     const data = await response.json();
