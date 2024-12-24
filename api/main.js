@@ -1,21 +1,20 @@
 const express = require("express");
-const cors = require("cors"); 
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = 4000;
 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
+app.use(cookieParser());
 
 const visitors = [];
-
-
-// IN-MEMORY FOR NOW!
 const MAX_VISITORS = 1000;
 
 function cleanupVisitors() {
   if (visitors.length > MAX_VISITORS) {
     console.log("Visitor memory limit reached, cleaning up...");
-    visitors.length = 0; 
+    visitors.length = 0;
   }
 }
 
@@ -29,21 +28,24 @@ app.get("/", (req, res) => {
 });
 
 app.get("/check-visitor", (req, res) => {
-  const visitorIp = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  const visitorId = req.cookies.visitorId || `${Date.now()}-${Math.random()}`;
 
-  const existingVisitor = visitors.find(visitor => visitor.ip === visitorIp);
+  const existingVisitor = visitors.find(visitor => visitor.id === visitorId);
 
   if (existingVisitor) {
-    return res.json({ position: `#${existingVisitor.position}` });
+    return res
+      .cookie("visitorId", visitorId, { httpOnly: true })
+      .json({ position: `#${existingVisitor.position}` });
   }
 
   const visitorPosition = visitors.length + 1;
-
-  visitors.push({ ip: visitorIp, position: visitorPosition });
+  visitors.push({ id: visitorId, position: visitorPosition });
 
   cleanupVisitors();
 
-  return res.json({ position: `#${visitorPosition}` });
+  return res
+    .cookie("visitorId", visitorId, { httpOnly: true })
+    .json({ position: `#${visitorPosition}` });
 });
 
 app.listen(port, () => {
