@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/check-visitor";
+const API_URL = "http://localhost:4000/check-visitor";
 
 export const getVisitorPosition = async (): Promise<string> => {
   try {
@@ -8,11 +8,13 @@ export const getVisitorPosition = async (): Promise<string> => {
       ?.split('=')[1];
 
     const response = await fetch(API_URL, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Visitor-Id": visitorId || "",
       },
+      body: JSON.stringify({
+        visitorId: visitorId || "",
+      }),
     });
 
     if (!response.ok) {

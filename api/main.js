@@ -31,8 +31,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/check-visitor", (req, res) => {
-  const visitorId = req.headers['x-visitor-id'] || `${Date.now()}-${Math.random()}`;
+app.post("/check-visitor", (req, res) => {
+  const visitorId = req.body.visitorId || `${Date.now()}-${Math.random()}`;
 
   const existingVisitor = visitors.find(visitor => visitor.id === visitorId);
 
