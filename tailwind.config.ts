@@ -17,7 +17,7 @@ const addVariablesForColors = ({ addBase, theme }: any) => {
 };
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -29,6 +29,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: colors.blue[500],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -51,7 +52,7 @@ const config: Config = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    addVariablesForColors, // Plugin to add CSS variables for Tailwind colors
+    addVariablesForColors,
   ],
 };
 

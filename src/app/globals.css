@@ -3,18 +3,36 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  --foreground: #fafafa;
   --radius: 0.5rem; 
   --bs-white-rgb:var(--background) !important
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
 
-  }
+.dark ::-webkit-scrollbar-thumb {
+  background: #555555;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+.profile {
+  border: 5px solid #3b82f6; 
+  border-radius: 50%;
+}
+
+.dark .profile {
+  padding: 5px;
+  border: none;
+  background-image: linear-gradient(#2c2828, #2c2828), linear-gradient(90deg, #3b82f6, #1e3a8a);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
 }
 
 html, body {
@@ -37,15 +55,6 @@ body {
   height: 80vh !important;
 }
 
-/* ::-webkit-scrollbar {
-  display: none; 
-}
-
-* {
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
-} */
-
 .custom-button {
   max-width: 240px;
   width: 40%;
@@ -63,12 +72,16 @@ body {
   }
 }
 
+.introduction-text {
+  color: #A3A3A3;
+}
+
 .custom-card {
   height: 85px !important;
   
 }
 .custom-card-text {
-  color: white !important;
+  color: #ffff!important;
 }
 
 ::-webkit-scrollbar {
@@ -77,7 +90,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--foreground); 
+  background: #555555;
   border-radius: 10px; 
   border: 2px solid var(--background);
 }
@@ -85,15 +98,6 @@ body {
 ::-webkit-scrollbar-track {
   background: var(--background);
   border-radius: 10px;
-}
-
-@media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-thumb {
-    background: #555555; 
-  }
-  ::-webkit-scrollbar-track {
-    background: #0a0a0a;
-  }
 }
 
 .follower-card {
