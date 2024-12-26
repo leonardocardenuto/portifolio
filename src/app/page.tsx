@@ -7,6 +7,7 @@ import { FaUser, FaProjectDiagram, FaDownload, FaChessKnight, FaTerminal } from 
 import { FaLocationDot } from "react-icons/fa6";
 import Skills from "@/components/Skills";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { TimelineDemo } from "@/components/demo";
 
 const scrollToRef = (ref: React.RefObject<HTMLElement>) => {
   if (ref.current) {
@@ -49,8 +50,8 @@ export default function Home() {
   return (
     <div>
       <Navbar navItems={navItems} />
-      <main className="">
-        <div className="absolute top-4 right-4 z-50">
+      <main>
+        <div className="absolute top-4 right-5 z-50">
           <DarkModeSwitch
             checked={isDarkMode}
             onChange={toggleDarkMode}
@@ -84,13 +85,16 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <button className="custom-button inline-flex h-12 items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-4 font-medium text-slate-400 transition-colors hover:outline-none hover:ring-2 hover:ring-slate-400 hover:ring-offset-2 hover:ring-offset-slate-50 animate-shimmer">
+          <button className="no-pointer custom-button inline-flex h-12 items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-4 font-medium text-slate-400 transition-colors hover:outline-none hover:ring-2 hover:ring-slate-400 hover:ring-offset-2 hover:ring-offset-slate-50 animate-shimmer">
             <FaDownload /> &nbsp; Download my CV
           </button>
         </BackgroundLines>
 
         <div ref={skillsRef} className="flex items-center justify-center w-full flex-col px-4 py-8 mt-5">
           <Skills />
+        </div>
+        <div ref={experienceRef} className="flex items-center justify-center w-full flex-col px-4 py-8 mt-5">
+          <TimelineDemo/>
         </div>
       </main>
     </div>
