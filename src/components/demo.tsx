@@ -50,7 +50,7 @@ export function TimelineDemo() {
   
   
   return (
-    <div className="w-full py-8 px-4 md:px-8 rounded-lg shadow-md">
+    <div className="w-full py-8 px-4 md:px-8">
       <Timeline data={data} />
     </div>
   );
