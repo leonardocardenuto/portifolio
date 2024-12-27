@@ -7,7 +7,15 @@ interface TimelineEntry {
   content: React.ReactNode;
 }
 
-export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
+export const Timeline = ({
+  data,
+  view,
+  onViewChange,
+}: {
+  data: TimelineEntry[];
+  view: string;
+  onViewChange: (view: string) => void;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -50,17 +58,58 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           Experience
         </motion.h1>
         <motion.p
-          {...fadeIn("y", 0.4)} 
+          {...fadeIn("y", 0.4)}
           className="text-sm min-[430px]:text-base max-w-lg md:max-w-3xl text-dark-200/70 dark:text-stone-200/70"
         >
-          On this section I'd like to show my experience with coding along the years.
+          On this section I'd like to show my experience with coding along the
+          years.
         </motion.p>
+
+        <motion.div
+          className="no-pointer flex justify-left items-center my-6"
+          {...fadeIn("y", 0.5)}
+        >
+          <div className="no-pointer relative inline-block w-[10.5rem]">
+            <input
+              type="checkbox"
+              id="switch"
+              className="hidden no-pointer"
+              checked={view === "academic"}
+              onChange={() => onViewChange(view === "work" ? "academic" : "work")}
+            />
+            <label
+              htmlFor="switch"
+              className="no-pointer block bg-gray-200 dark:bg-gray-700 cursor-pointer rounded-full w-full h-12"
+            >
+              <span
+                className={`no-pointer absolute top-1 left-1 h-10 w-20 bg-blue-600 rounded-full shadow-md transform transition-transform ${
+                  view === "academic" ? "translate-x-20" : "translate-x-0"
+                }`}
+              ></span>
+              <div className="no-pointer flex justify-between items-center absolute w-full h-full text-neutral-800 dark:text-neutral-200 text-sm font-medium">
+                <span
+                  className={`no-pointer w-1/2 text-center transition-colors ${
+                    view === "work" ? "text-white" : "text-neutral-800"
+                  }`}
+                >
+                  Work
+                </span>
+                <span
+                  className={`no-pointer w-1/2 text-center transition-colors ${
+                    view === "academic" ? "text-white" : "text-neutral-800"
+                  }`}
+                >
+                  Academic
+                </span>
+              </div>
+            </label>
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* Timeline */}
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
         {data.map((item, index) => {
-          const fadeInItem = fadeIn("y", 0.5 + index * 0.2); 
+          const fadeInItem = fadeIn("y", 0.5 + index * 0.2);
 
           return (
             <motion.div

@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(cors({
-  origin: true,
+  origin: process.env.NODE_ENV == "production" ? process.env.REACT_APP : process.env.REACT_LOCAL_URL, 
   credentials: true,
 }));
 

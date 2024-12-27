@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/check-visitor";
+const API_URL = process.env.NEXT_PUBLIC_ENV == "production" ? process.env.NEXT_PUBLIC_API_URL : `${process.env.NEXT_PUBLIC_API_LOCAL_URL}check-visitor`;
 
 export const getVisitorPosition = async (): Promise<string> => {
   try {
@@ -9,7 +9,7 @@ export const getVisitorPosition = async (): Promise<string> => {
       localStorage.setItem("visitorId", visitorId); 
     }
 
-    const response = await fetch(API_URL, {
+    const response = await fetch(API_URL ?? '', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
